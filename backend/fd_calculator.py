@@ -1,24 +1,24 @@
-def calculate_fd_prematurity(principal, roi, months):
-    """
-    FD Rule:
-    Premature Rate = ROI - 1
-    """
+from decimal import Decimal, getcontext
 
-    premature_rate = roi - 1
+getcontext().prec = 28
 
-    monthly_original = principal * (roi / 100) / 12
-    interest_received = monthly_original * months
 
-    monthly_premature = principal * (premature_rate / 100) / 12
-    eligible_interest = monthly_premature * months
+def calculate_fd(principal, original_rate, completed_months):
 
-    excess_interest = interest_received - eligible_interest
-    final_amount = principal - excess_interest
+    principal = Decimal(str(principal))
+    original_rate = Decimal(str(original_rate))
+    completed_months = Decimal(str(completed_months))
+
+    # FD rule: minus only 1%
+    premature_rate = original_rate - Decimal("1.0")
+
+    # Interest calculation (month based)
+    interest = principal * (premature_rate / Decimal("100")) * (completed_months / Decimal("12"))
+
+    final_settlement = principal + interest
 
     return {
-        "premature_rate": premature_rate,
-        "interest_received": interest_received,
-        "eligible_interest": eligible_interest,
-        "excess_interest": excess_interest,
-        "final_amount": final_amount
+        "premature_rate": float(premature_rate),
+        "interest": float(interest),
+        "final_settlement": float(final_settlement)
     }
