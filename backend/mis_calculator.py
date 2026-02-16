@@ -20,13 +20,14 @@ def calculate_mis(principal, original_rate, months):
     final_settlement = principal - excess
 
     return {
-        "premature_rate": premature_rate,
-        "interest_received": interest_received,
-        "eligible_interest": eligible_interest,
-        "excess": excess,
-        "final_amount": final_settlement,
-        "total_effective": final_settlement + interest_received
-    }
+    "premature_rate": premature_rate,
+    "interest_received": interest_received,
+    "eligible_interest": eligible_interest,
+    "excess": excess,
+    "final_settlement": final_settlement,
+    "total_effective": final_settlement + interest_received
+   }
+
 
 
 def compare_wait(principal, original_rate, months_completed, total_tenure):
