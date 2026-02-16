@@ -6,10 +6,9 @@ st.set_page_config(
 )
 
 # Sidebar Logo
-st.sidebar.image("assets/logo.png", width=200)
+st.sidebar.image("assets/SID MACCS LOGO.png", width=200)
+st.image("assets/SID MACCS LOGO.png", width=250)
 
-# Main Logo
-st.image("assets/logo.png", width=250)
 
 st.title("SIDDHARTHA MACCS LTD")
 st.subheader("MIS & FD Prematurity Calculator")
