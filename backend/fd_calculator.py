@@ -1,24 +1,18 @@
-from decimal import Decimal, getcontext
+def calculate_fd(principal, original_rate, months):
+    """
+    FD Prematurity Logic:
+    - Only 1% reduction
+    - Simple interest calculation
+    """
 
-getcontext().prec = 28
+    premature_rate = original_rate - 1.0
 
+    interest = principal * premature_rate / 100 * (months / 12)
 
-def calculate_fd(principal, original_rate, completed_months):
-
-    principal = Decimal(str(principal))
-    original_rate = Decimal(str(original_rate))
-    completed_months = Decimal(str(completed_months))
-
-    # FD rule: minus only 1%
-    premature_rate = original_rate - Decimal("1.0")
-
-    # Interest calculation (month based)
-    interest = principal * (premature_rate / Decimal("100")) * (completed_months / Decimal("12"))
-
-    final_settlement = principal + interest
+    final_amount = principal + interest
 
     return {
-        "premature_rate": float(premature_rate),
-        "interest": float(interest),
-        "final_settlement": float(final_settlement)
+        "premature_rate": premature_rate,
+        "interest": interest,
+        "final_amount": final_amount
     }

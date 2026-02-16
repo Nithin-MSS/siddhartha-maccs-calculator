@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from backend.mis_calculator import calculate_mis, compare_wait
 
+
 st.title("📘 MIS Prematurity Calculator")
 
 principal = st.number_input("Deposit Amount (₹)", min_value=0.0)
