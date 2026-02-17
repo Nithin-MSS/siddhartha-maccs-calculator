@@ -13,9 +13,10 @@ if st.button("Calculate MIS"):
 
     st.subheader("Current Prematurity Result")
 
-    st.write(f"Premature Rate: {result['premature_rate']}%")
+    st.write(f"Premature Rate: {result['premature_rate']:.1f}%")
     st.write(f"Interest Received: ₹{result['interest_received']:,.2f}")
     st.write(f"Eligible Interest: ₹{result['eligible_interest']:,.2f}")
     st.write(f"Excess Deducted: ₹{result['excess_deducted']:,.2f}")
+
     st.success(f"Final Settlement: ₹{result['final_settlement']:,.2f}")
-    st.write(f"Total Effective Amount: ₹{result['total_effective']:,.2f}")
+    st.info(f"Total Effective Amount: ₹{result['total_effective']:,.2f}")
