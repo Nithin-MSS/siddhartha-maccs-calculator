@@ -1,18 +1,21 @@
-def calculate_fd(principal, original_rate, months):
-    """
-    FD Prematurity Logic:
-    - Only 1% reduction
-    - Simple interest calculation
-    """
+from datetime import date
 
-    premature_rate = original_rate - 1.0
+def calculate_fd(principal, rate, deposit_date, premature_date):
 
-    interest = principal * premature_rate / 100 * (months / 12)
+    total_days = (premature_date - deposit_date).days
 
-    final_amount = principal + interest
+    # FD rule → Only 1% deduction
+    premature_rate = rate - 1.0
+
+    # Interest at premature rate
+    interest = principal * (premature_rate / 100) * (total_days / 365)
+
+    # Final settlement
+    final_settlement = principal + interest
 
     return {
+        "total_days": total_days,
         "premature_rate": premature_rate,
         "interest": interest,
-        "final_amount": final_amount
+        "final_settlement": final_settlement
     }
