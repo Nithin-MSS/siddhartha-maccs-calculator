@@ -1,29 +1,28 @@
-from datetime import date
+def calculate_mis(principal, original_rate, completed_months):
+    # Premature rate (2% reduction total)
+    premature_rate = original_rate - 2
 
-def calculate_mis(principal, rate, deposit_date, premature_date):
+    # Monthly interest calculations
+    original_monthly = (principal * original_rate / 100) / 12
+    eligible_monthly = (principal * premature_rate / 100) / 12
 
-    total_days = (premature_date - deposit_date).days
+    # Total interest
+    interest_received = original_monthly * completed_months
+    eligible_interest = eligible_monthly * completed_months
 
-    # Society rule: Rate already includes penalty
-    premature_rate = rate - 2.0  # example 10.8 → 8.8
-
-    # Interest actually paid (original rate)
-    original_interest = principal * (rate / 100) * (total_days / 365)
-
-    # Eligible interest at premature rate
-    eligible_interest = principal * (premature_rate / 100) * (total_days / 365)
-
-    # Excess paid
-    excess = original_interest - eligible_interest
+    # Excess to deduct
+    excess_deducted = interest_received - eligible_interest
 
     # Final settlement
-    final_settlement = principal - excess
+    final_settlement = principal - excess_deducted
+
+    total_effective = final_settlement + interest_received
 
     return {
-        "total_days": total_days,
         "premature_rate": premature_rate,
-        "original_interest": original_interest,
+        "interest_received": interest_received,
         "eligible_interest": eligible_interest,
-        "excess": excess,
-        "final_settlement": final_settlement
+        "excess_deducted": excess_deducted,
+        "final_settlement": final_settlement,
+        "total_effective": total_effective
     }

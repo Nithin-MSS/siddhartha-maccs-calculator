@@ -1,21 +1,22 @@
-from datetime import date
+def calculate_fd(principal, original_rate, completed_months):
+    # FD premature rule → only 1% reduction
+    premature_rate = original_rate - 1
 
-def calculate_fd(principal, rate, deposit_date, premature_date):
+    # Simple interest using months
+    original_interest = (principal * original_rate / 100) * (completed_months / 12)
+    eligible_interest = (principal * premature_rate / 100) * (completed_months / 12)
 
-    total_days = (premature_date - deposit_date).days
+    excess_deducted = original_interest - eligible_interest
 
-    # FD rule → Only 1% deduction
-    premature_rate = rate - 1.0
+    final_settlement = principal + eligible_interest
 
-    # Interest at premature rate
-    interest = principal * (premature_rate / 100) * (total_days / 365)
-
-    # Final settlement
-    final_settlement = principal + interest
+    total_effective = final_settlement
 
     return {
-        "total_days": total_days,
         "premature_rate": premature_rate,
-        "interest": interest,
-        "final_settlement": final_settlement
+        "original_interest": original_interest,
+        "eligible_interest": eligible_interest,
+        "excess_deducted": excess_deducted,
+        "final_settlement": final_settlement,
+        "total_effective": total_effective
     }
